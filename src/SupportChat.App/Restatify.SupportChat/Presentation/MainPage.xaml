@@ -1,0 +1,79 @@
+﻿<Page x:Class="Restatify.SupportChat.Presentation.MainPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Restatify.SupportChat.Presentation"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  mc:Ignorable="d"
+	  xmlns:uen="using:Uno.Extensions.Navigation.UI"
+	  xmlns:utu="using:Uno.Toolkit.UI"
+	  xmlns:not_skia="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  NavigationCacheMode="Required"
+	  Background="{ThemeResource BackgroundBrush}">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<utu:NavigationBar Content="{Binding Title}" />
+
+		<ScrollViewer Grid.Row="1">
+			<StackPanel Spacing="10" Padding="16" MaxWidth="980">
+				<TextBlock Text="Connection" FontSize="18" FontWeight="SemiBold" />
+				<TextBox Header="API Base URL"
+						 Text="{Binding BaseUrl, Mode=TwoWay}"
+						 PlaceholderText="http://127.0.0.1:8000" />
+				<TextBox Header="X-API-Key"
+						 Text="{Binding ApiKey, Mode=TwoWay}" />
+
+				<TextBlock Text="Staff Login" FontSize="18" FontWeight="SemiBold" Margin="0,8,0,0" />
+				<TextBox Header="Email"
+						 Text="{Binding Email, Mode=TwoWay}"
+						 PlaceholderText="support@restatify.tech" />
+				<PasswordBox Header="Password"
+						 PasswordRevealMode="Peek"
+						 Password="{Binding Password, Mode=TwoWay}" />
+
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<Button Content="Login"
+							Command="{Binding Login}" />
+					<Button Content="Load Conversations"
+							Command="{Binding LoadConversations}" />
+					<Button Content="Open Details"
+							Command="{Binding OpenConversationDetails}" />
+				</StackPanel>
+
+				<TextBlock Text="{Binding Status}" TextWrapping="Wrap" />
+				<TextBlock Text="{Binding AccessTokenPreview}" TextWrapping="WrapWholeWords" Opacity="0.75" />
+				<TextBlock Text="{Binding RefreshTokenPreview}" TextWrapping="WrapWholeWords" Opacity="0.75" />
+
+				<TextBlock Text="Conversations" FontSize="18" FontWeight="SemiBold" Margin="0,8,0,0" />
+				<ListView ItemsSource="{Binding Conversations}"
+						  SelectedItem="{Binding SelectedConversation, Mode=TwoWay}"
+						  Height="220">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Display}" TextWrapping="Wrap" />
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+
+				<Border BorderBrush="#33000000"
+						BorderThickness="1"
+						Padding="10"
+						CornerRadius="6">
+					<TextBlock Text="{Binding SelectedConversationDetails}" TextWrapping="Wrap" />
+				</Border>
+
+				<TextBox Header="Reply"
+						 AcceptsReturn="True"
+						 MinHeight="90"
+						 Text="{Binding ReplyMessage, Mode=TwoWay}" />
+				<Button Content="Send Reply"
+						Command="{Binding SendReply}" />
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</Page>

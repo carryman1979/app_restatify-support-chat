@@ -1,0 +1,67 @@
+﻿<Page x:Class="Restatify.SupportChat.Presentation.SecondPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:Restatify.SupportChat.Presentation"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:uen="using:Uno.Extensions.Navigation.UI"
+	  xmlns:utu="using:Uno.Toolkit.UI"
+	  Background="{ThemeResource BackgroundBrush}">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<utu:NavigationBar Content="Conversation Details">
+			<utu:NavigationBar.MainCommand>
+				<AppBarButton>
+					<AppBarButton.Icon>
+						<BitmapIcon UriSource="ms-appx:///Restatify.SupportChat/Assets/Icons/back.png" />
+					</AppBarButton.Icon>
+				</AppBarButton>
+			</utu:NavigationBar.MainCommand>
+		</utu:NavigationBar>
+
+		<ScrollViewer Grid.Row="1">
+			<StackPanel Spacing="8" Padding="16">
+				<TextBlock Text="{Binding ConversationId}" FontSize="18" FontWeight="SemiBold" />
+				<TextBlock Text="{Binding SourceUrl}" TextWrapping="Wrap" />
+				<TextBlock Text="{Binding UpdatedAtGmt}" />
+				<TextBlock Text="{Binding UnreadText}" />
+
+				<TextBlock Text="Server Messages" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0" />
+				<ToggleSwitch Header="Auto Refresh"
+							  IsOn="{Binding AutoRefreshEnabled, Mode=TwoWay}" />
+				<TextBlock Text="{Binding AutoRefreshIntervalText}" />
+				<Button Content="Refresh From Server"
+						Command="{Binding RefreshServerMessages}" />
+				<Button Content="{Binding LoadMoreButtonText}"
+						IsEnabled="{Binding HasMoreServerMessages}"
+						Command="{Binding LoadMoreServerMessages}" />
+				<TextBlock Text="{Binding ServerStatus}" TextWrapping="Wrap" />
+
+				<ListView ItemsSource="{Binding ServerMessages}" Height="220">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Display}" TextWrapping="Wrap" />
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+
+				<TextBlock Text="Local Reply History" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0" />
+				<Button Content="Refresh Local History"
+						Command="{Binding RefreshHistory}" />
+
+				<ListView ItemsSource="{Binding Replies}" Height="320">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Display}" TextWrapping="Wrap" />
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</Page>

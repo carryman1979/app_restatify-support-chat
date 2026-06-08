@@ -1,0 +1,10 @@
+{
+  "profiles": {
+	"Restatify.SupportChat.Windows (Package)": {
+	  "commandName": "MsixPackage"
+	},
+	"Restatify.SupportChat.Windows (Unpackaged)": {
+	  "commandName": "Project"
+	}
+  }
+}
