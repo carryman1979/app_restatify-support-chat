@@ -1,0 +1,71 @@
+2026-06-11 08:35:24.158 +02:00 [WRN] The WebRootPath was not found: D:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-11 08:35:24.248 +02:00 [WRN] The WebRootPath was not found: D:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-11 08:35:24.250 +02:00 [WRN] The WebRootPath was not found: D:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-11 08:35:24.302 +02:00 [INF] Now listening on: https://localhost:5000
+2026-06-11 08:35:24.302 +02:00 [INF] Now listening on: http://localhost:5001
+2026-06-11 08:35:24.304 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-11 08:35:24.305 +02:00 [INF] Hosting environment: Development
+2026-06-11 08:35:24.306 +02:00 [INF] Content root path: D:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server
+2026-06-11 08:35:24.379 +02:00 [INF] Request starting HTTP/1.1 GET https://localhost:5000/ - null null
+2026-06-11 08:35:24.465 +02:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2026-06-11 08:35:24.466 +02:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2026-06-11 08:35:24.472 +02:00 [INF] Request finished HTTP/1.1 GET https://localhost:5000/index.html - 404 0 null 93.3682ms
+2026-06-11 08:35:24.475 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:5000/index.html, Response status code: 404
+2026-06-11 08:35:24.631 +02:00 [INF] Request starting HTTP/2 GET https://localhost:5000/ - null null
+2026-06-11 08:35:24.633 +02:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2026-06-11 08:35:24.633 +02:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2026-06-11 08:35:24.634 +02:00 [INF] Request finished HTTP/2 GET https://localhost:5000/index.html - 404 0 null 2.9388ms
+2026-06-11 08:35:24.635 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:5000/index.html, Response status code: 404
+2026-06-11 09:00:06.418 +02:00 [INF] Request starting HTTP/1.1 GET https://localhost:5000/ - null null
+2026-06-11 09:00:06.420 +02:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2026-06-11 09:00:06.420 +02:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2026-06-11 09:00:06.421 +02:00 [INF] Request finished HTTP/1.1 GET https://localhost:5000/index.html - 404 0 null 2.5155ms
+2026-06-11 09:00:06.423 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:5000/index.html, Response status code: 404
+2026-06-11 09:00:06.553 +02:00 [INF] Request starting HTTP/2 GET https://localhost:5000/ - null null
+2026-06-11 09:00:06.555 +02:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2026-06-11 09:00:06.556 +02:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2026-06-11 09:00:06.557 +02:00 [INF] Request finished HTTP/2 GET https://localhost:5000/index.html - 404 0 null 3.7602ms
+2026-06-11 09:00:06.559 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:5000/index.html, Response status code: 404
+2026-06-11 09:28:24.378 +02:00 [WRN] The WebRootPath was not found: D:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-11 09:28:24.457 +02:00 [WRN] The WebRootPath was not found: D:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-11 09:28:24.458 +02:00 [WRN] The WebRootPath was not found: D:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-11 09:28:24.501 +02:00 [INF] Now listening on: https://localhost:5000
+2026-06-11 09:28:24.502 +02:00 [INF] Now listening on: http://localhost:5001
+2026-06-11 09:28:24.502 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-11 09:28:24.503 +02:00 [INF] Hosting environment: Development
+2026-06-11 09:28:24.503 +02:00 [INF] Content root path: D:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server
+2026-06-11 09:28:24.751 +02:00 [INF] Request starting HTTP/1.1 GET https://localhost:5000/ - null null
+2026-06-11 09:28:24.793 +02:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2026-06-11 09:28:24.794 +02:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2026-06-11 09:28:24.797 +02:00 [INF] Request finished HTTP/1.1 GET https://localhost:5000/index.html - 404 0 null 46.1216ms
+2026-06-11 09:28:24.799 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:5000/index.html, Response status code: 404
+2026-06-11 09:28:24.909 +02:00 [INF] Request starting HTTP/2 GET https://localhost:5000/ - null null
+2026-06-11 09:28:24.911 +02:00 [INF] Executing endpoint 'Fallback {*path:nonfile}'
+2026-06-11 09:28:24.912 +02:00 [INF] Executed endpoint 'Fallback {*path:nonfile}'
+2026-06-11 09:28:24.913 +02:00 [INF] Request finished HTTP/2 GET https://localhost:5000/index.html - 404 0 null 4.0537ms
+2026-06-11 09:28:24.915 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:5000/index.html, Response status code: 404
+2026-06-11 12:04:17.452 +02:00 [WRN] The WebRootPath was not found: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-11 12:04:17.472 +02:00 [WRN] The WebRootPath was not found: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-11 12:04:17.473 +02:00 [WRN] The WebRootPath was not found: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-11 12:04:17.524 +02:00 [INF] Now listening on: https://localhost:5000
+2026-06-11 12:04:17.525 +02:00 [INF] Now listening on: http://localhost:5001
+2026-06-11 12:04:17.526 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-11 12:04:17.527 +02:00 [INF] Hosting environment: Development
+2026-06-11 12:04:17.527 +02:00 [INF] Content root path: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server
+2026-06-15 17:15:14.420 +02:00 [WRN] The WebRootPath was not found: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-15 17:15:14.473 +02:00 [WRN] The WebRootPath was not found: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-15 17:15:14.473 +02:00 [WRN] The WebRootPath was not found: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-15 17:15:14.581 +02:00 [INF] Now listening on: https://localhost:5000
+2026-06-15 17:15:14.581 +02:00 [INF] Now listening on: http://localhost:5001
+2026-06-15 17:15:14.582 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-15 17:15:14.583 +02:00 [INF] Hosting environment: Development
+2026-06-15 17:15:14.583 +02:00 [INF] Content root path: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server
+2026-06-15 17:15:16.705 +02:00 [INF] Application is shutting down...
+2026-06-15 17:28:08.759 +02:00 [WRN] The WebRootPath was not found: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-15 17:28:08.780 +02:00 [WRN] The WebRootPath was not found: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-15 17:28:08.780 +02:00 [WRN] The WebRootPath was not found: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server\wwwroot. Static files may be unavailable.
+2026-06-15 17:28:08.831 +02:00 [INF] Now listening on: https://localhost:5000
+2026-06-15 17:28:08.832 +02:00 [INF] Now listening on: http://localhost:5001
+2026-06-15 17:28:08.833 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-15 17:28:08.834 +02:00 [INF] Hosting environment: Development
+2026-06-15 17:28:08.834 +02:00 [INF] Content root path: d:\laragon\www\restatify.tech\app_restatify-support-chat\src\SupportChat.App\Restatify.SupportChat.Server

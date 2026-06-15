@@ -1,10 +1,24 @@
 {
   "profiles": {
-	"Restatify.SupportChat.Windows (Package)": {
-	  "commandName": "MsixPackage"
-	},
-	"Restatify.SupportChat.Windows (Unpackaged)": {
-	  "commandName": "Project"
-	}
+    "Restatify.SupportChat.Windows (Desktop)": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Restatify.SupportChat.Windows (Unpackaged)": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Restatify.SupportChat.Windows (Desktop CLI Wrapper)": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "commandLineArgs": "run --project Restatify.SupportChat.Windows.csproj -f net9.0-desktop",
+      "workingDirectory": "."
+    }
   }
 }

@@ -1,0 +1,76 @@
+<Page x:Class="Restatify.SupportChat.Presentation.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:utu="using:Uno.Toolkit.UI"
+      mc:Ignorable="d"
+      Background="{ThemeResource BackgroundBrush}">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<utu:NavigationBar x:Uid="SettingsPage_NavigationBar" Content="Settings">
+			<utu:NavigationBar.MainCommand>
+				<AppBarButton Icon="Back" Click="OnBackClick" />
+			</utu:NavigationBar.MainCommand>
+		</utu:NavigationBar>
+
+		<ScrollViewer Grid.Row="1"
+				  VerticalScrollBarVisibility="Auto"
+				  VerticalScrollMode="Auto"
+				  HorizontalScrollBarVisibility="Disabled"
+				  HorizontalScrollMode="Disabled">
+			<StackPanel Padding="24" Spacing="16" MaxWidth="680">
+				<Border Background="{ThemeResource SurfaceBrush}"
+						CornerRadius="8"
+						Padding="12"
+						HorizontalAlignment="Left">
+					<StackPanel Spacing="8">
+						<TextBlock x:Uid="SettingsPage_LogoPreviewText" Text="Logo Preview" FontWeight="SemiBold" />
+						<Image Source="{Binding LogoPreviewUri}"
+							   Width="64"
+							   Height="64"
+							   Stretch="Uniform"
+							   ImageFailed="OnLogoImageFailed" />
+					</StackPanel>
+				</Border>
+
+				<TextBlock x:Uid="SettingsPage_ConnectionText" Text="Connection"
+						   FontSize="20"
+						   FontWeight="SemiBold" />
+
+				<TextBox x:Uid="SettingsPage_BaseUrlTextBox" Header="API Base URL"
+					 Text="{Binding BaseUrl, Mode=TwoWay}"
+					 PlaceholderText="http://127.0.0.1:8089" />
+
+				<TextBox x:Uid="SettingsPage_ApiKeyTextBox" Header="X-API-Key (optional)"
+					 Text="{Binding ApiKey, Mode=TwoWay}"
+					 PlaceholderText="Optional fallback for direct API access" />
+
+				<TextBox x:Uid="SettingsPage_LogoUrlTextBox" Header="Logo URL (optional)"
+					 Text="{Binding LogoUrl, Mode=TwoWay}"
+					 PlaceholderText="https://example.com/logo.png" />
+
+				<ComboBox x:Uid="SettingsPage_LanguageComboBox" Header="Language"
+						  ItemsSource="{Binding AvailableLanguages}"
+						  DisplayMemberPath="DisplayName"
+						  SelectedValuePath="Code"
+						  SelectedValue="{Binding SelectedLanguageCode, Mode=TwoWay}" />
+
+				<Button x:Uid="SettingsPage_SaveButton" Content="Save Settings"
+						Command="{Binding SaveCommand}"
+						HorizontalAlignment="Left"
+						MinWidth="180"
+						Padding="14,10" />
+
+				<TextBlock Text="{Binding Status}"
+						   TextWrapping="Wrap"
+						   Opacity="0.8" />
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</Page>

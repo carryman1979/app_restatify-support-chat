@@ -14,13 +14,17 @@
 		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 		<NoWarn>$(NoWarn);Uno0001;CS1998;CA1416;NU1507</NoWarn>
 
-		<DefaultLanguage>en</DefaultLanguage>
+		<DefaultLanguage>de</DefaultLanguage>
 
 		<IsAndroid>false</IsAndroid>
 		<IsIOS>false</IsIOS>
 		<IsMac>false</IsMac>
 		<IsMacCatalyst>false</IsMacCatalyst>
 		<IsWinAppSdk>false</IsWinAppSdk>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="Exists('C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VisualStudio\v17.0\AppxPackage\Microsoft.Build.Packaging.Pri.Tasks.dll')">
+		<AppxMSBuildToolsPath>C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VisualStudio\v17.0\AppxPackage\</AppxMSBuildToolsPath>
 	</PropertyGroup>
 
 	<Choose>

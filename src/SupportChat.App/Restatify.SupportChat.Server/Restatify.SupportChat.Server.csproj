@@ -7,11 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Restatify.SupportChat.Wasm\Restatify.SupportChat.Wasm.csproj" />
-		<ProjectReference Include="..\Restatify.SupportChat.DataContracts\Restatify.SupportChat.DataContracts.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageReference Include="Uno.Wasm.Bootstrap.Server" Version="7.0.19" />
