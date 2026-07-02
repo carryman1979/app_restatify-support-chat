@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "RestatifySupportChat",
+  "display": "standalone",
+  "name": "RestatifySupportChat",
+  "short_name": "RestatifySupportChat",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}

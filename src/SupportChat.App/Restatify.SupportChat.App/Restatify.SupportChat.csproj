@@ -1,0 +1,61 @@
+﻿<Project Sdk="Uno.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net10.0-android;net10.0-ios;net10.0-windows10.0.26100;net10.0-browserwasm;net10.0-desktop;net10.0</TargetFrameworks>
+
+		<OutputType>Exe</OutputType>
+		<UnoSingleProject>true</UnoSingleProject>
+		<RootNamespace>Restatify.SupportChat</RootNamespace>
+
+		<!-- Suppress trimming warnings for Uno Extensions -->
+		<NoWarn>$(NoWarn);IL2026;MVVMTK0045</NoWarn>
+
+		<ApplicationTitle>Restatify Support Chat</ApplicationTitle>
+		<AssemblyTitle>Restatify Support Chat</AssemblyTitle>
+		<Product>Restatify Support Chat</Product>
+		<ApplicationId>tech.restatify.supportchat</ApplicationId>
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+		<ApplicationPublisher>Restatify UG</ApplicationPublisher>
+		<Description>Restatify Support Chat powered by Uno Platform to connect to the wordpress chat plugin Restatify AI Multichat.</Description>
+
+		<UnoFeatures>
+			Material;
+			Dsp;
+			Hosting;
+			Toolkit;
+			Logging;
+			Mvvm;
+			Configuration;
+			HttpKiota;
+			Serialization;
+			Localization;
+			Authentication;
+			Navigation;
+			ThemeService;
+			SkiaRenderer;
+		</UnoFeatures>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Debug' or '$(IsUiAutomationMappingEnabled)'=='True'">
+		<IsUiAutomationMappingEnabled>True</IsUiAutomationMappingEnabled>
+		<DefineConstants>$(DefineConstants);USE_UITESTS</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-android'">
+		<SynthesizeLinkMetadata>false</SynthesizeLinkMetadata>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-desktop'">
+		<ApplicationIcon>Assets\Icons\restatify_logo.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Serilog" />
+	  <PackageReference Include="Uno.Extensions.Logging.Serilog" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Restatify.SupportChat.DataContracts\Restatify.SupportChat.DataContracts.csproj" />
+	</ItemGroup>
+	
+</Project>
