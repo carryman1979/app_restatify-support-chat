@@ -12,7 +12,7 @@ Cross-platform support client using Uno Platform.
 
 The runnable Uno solution is located in:
 
-- `src/SupportChat.App/Restatify.SupportChat.sln`
+- `src/SupportChat.App/Restatify.SupportChat.slnx`
 
 Additional folders reserved for planned package split:
 
@@ -23,11 +23,12 @@ Additional folders reserved for planned package split:
 ## Build (from repo root)
 
 ```bash
-dotnet restore src/SupportChat.App/Restatify.SupportChat.sln
-dotnet build src/SupportChat.App/Restatify.SupportChat.sln
+dotnet restore src/SupportChat.App/Restatify.SupportChat.slnx
+dotnet build src/SupportChat.App/Restatify.SupportChat.slnx
 ```
 
 ## Notes
 
-- Scaffold generated with Uno.Extensions template targeting `net8.0`.
+- Scaffold generated with Uno.Extensions template targeting `net10.0`.
 - Architecture split into dedicated class libraries will be introduced incrementally.
+- Support chat auth is WordPress-specific: sign in first, generate a support API key, then use that key for chat requests and live updates.

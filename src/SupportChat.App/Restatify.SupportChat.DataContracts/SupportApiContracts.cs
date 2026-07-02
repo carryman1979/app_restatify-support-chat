@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace Restatify.SupportChat.DataContracts;
 
 public sealed record LoginRequestDto(
-	[property: JsonPropertyName("email")] string Email,
+	[property: JsonPropertyName("username")] string Username,
 	[property: JsonPropertyName("password")] string Password);
 
 public sealed record LoginResponseDto(
@@ -40,3 +40,19 @@ public sealed record ConversationMessagesPageDto(
 
 public sealed record GenerateApiKeyResponseDto(
 	[property: JsonPropertyName("api_key")] string ApiKey);
+
+public sealed record ConversationToolsDto(
+	[property: JsonPropertyName("conversation_id")] string ConversationId,
+	[property: JsonPropertyName("ai_mode")] string AiMode,
+	[property: JsonPropertyName("booking_overlay_available")] bool BookingOverlayAvailable);
+
+public sealed record SetConversationAiModeRequestDto(
+	[property: JsonPropertyName("ai_mode")] string AiMode);
+
+public sealed record SetConversationAiModeResponseDto(
+	[property: JsonPropertyName("conversation_id")] string ConversationId,
+	[property: JsonPropertyName("ai_mode")] string AiMode);
+
+public sealed record DeleteConversationResponseDto(
+	[property: JsonPropertyName("deleted")] bool Deleted,
+	[property: JsonPropertyName("already_gone")] bool AlreadyGone);

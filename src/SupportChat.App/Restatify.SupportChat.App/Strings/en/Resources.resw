@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Restatify.SupportChat-en</value>
+  </data>
+  <data name="MainPage_SettingsButton.Label" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MainPage_LogsButton.Label" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="MainPage_StaffLoginText.Text" xml:space="preserve">
+    <value>Staff Login</value>
+  </data>
+  <data name="MainPage_EmailTextBox.Header" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="MainPage_PasswordBox.Header" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="MainPage_LoginButton.Content" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="MainPage_LoadConversationsButton.Content" xml:space="preserve">
+    <value>Load Conversations</value>
+  </data>
+  <data name="MainPage_LoadConversationsButton.Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="MainPage_StatusText.Text" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="MainPage_ConversationsText.Text" xml:space="preserve">
+    <value>Conversations</value>
+  </data>
+  <data name="MainPage_SendReplyText.Text" xml:space="preserve">
+    <value>Send Reply</value>
+  </data>
+  <data name="MainPage_ReplyMessageTextBox.Header" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="MainPage_ReplyMessageTextBox.PlaceholderText" xml:space="preserve">
+    <value>Type your reply here...</value>
+  </data>
+  <data name="MainPage_SendReplyButton.Content" xml:space="preserve">
+    <value>Send Reply</value>
+  </data>
+  <data name="MainPage_RememberLoginCheckBox.Content" xml:space="preserve">
+    <value>Remember login</value>
+  </data>
+  <data name="MainPage_OpenChatButton.Content" xml:space="preserve">
+    <value>Open Chat</value>
+  </data>
+  <data name="MainPage_LogoutButton.Content" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="MainPage_TitleTemplate" xml:space="preserve">
+    <value>Support Inbox - {0}</value>
+  </data>
+  <data name="SettingsPage_NavigationBar.Content" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsPage_ConnectionText.Text" xml:space="preserve">
+    <value>Connection</value>
+  </data>
+  <data name="SettingsPage_BaseUrlTextBox.Header" xml:space="preserve">
+    <value>API Base URL</value>
+  </data>
+  <data name="SettingsPage_ApiKeyTextBox.Header" xml:space="preserve">
+    <value>X-API-Key</value>
+  </data>
+  <data name="SettingsPage_LogoPreviewText.Text" xml:space="preserve">
+    <value>Logo Preview</value>
+  </data>
+  <data name="SettingsPage_LogoUrlTextBox.Header" xml:space="preserve">
+    <value>Logo URL (optional)</value>
+  </data>
+  <data name="SettingsPage_LogoUrlTextBox.PlaceholderText" xml:space="preserve">
+    <value>https://example.com/logo.png</value>
+  </data>
+  <data name="SettingsPage_LanguageComboBox.Header" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="SettingsPage_ThemeComboBox.Header" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="SettingsPage_SaveButton.Content" xml:space="preserve">
+    <value>Save Settings</value>
+  </data>
+  <data name="ConversationDetailsPage_ConversationIdLabel.Text" xml:space="preserve">
+    <value>Conversation ID</value>
+  </data>
+  <data name="ConversationDetailsPage_SourceLabel.Text" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="ConversationDetailsPage_LastUpdatedLabel.Text" xml:space="preserve">
+    <value>Last Updated</value>
+  </data>
+  <data name="ConversationDetailsPage_UnreadLabel.Text" xml:space="preserve">
+    <value>Unread</value>
+  </data>
+  <data name="ConversationDetailsPage_RefreshButton.Content" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="ConversationDetailsPage_RefreshIconButton.Label" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="ConversationDetailsPage_LiveUpdatesLabel.Text" xml:space="preserve">
+    <value>Live updates</value>
+  </data>
+  <data name="ConversationDetailsPage_AutoRefreshToggle.Header" xml:space="preserve">
+    <value>Auto-Refresh</value>
+  </data>
+  <data name="ConversationDetailsPage_ServerMessagesText.Text" xml:space="preserve">
+    <value>Server Messages</value>
+  </data>
+  <data name="ConversationDetailsPage_LocalReplyHistoryText.Text" xml:space="preserve">
+    <value>Local Reply History</value>
+  </data>
+  <data name="ConversationDetailsPage_SendReplyText.Text" xml:space="preserve">
+    <value>Send Reply</value>
+  </data>
+  <data name="ConversationDetailsPage_ReplyMessageTextBox.Header" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="ConversationDetailsPage_ReplyMessageTextBox.PlaceholderText" xml:space="preserve">
+    <value>Type your reply here...</value>
+  </data>
+  <data name="ConversationDetailsPage_SendReplyButton.Content" xml:space="preserve">
+    <value>Send Reply</value>
+  </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Ready.</value>
+  </data>
+  <data name="Status_NotLoggedIn" xml:space="preserve">
+    <value>Not logged in.</value>
+  </data>
+  <data name="Status_NoConversationSelected" xml:space="preserve">
+    <value>No conversation selected.</value>
+  </data>
+  <data name="Status_ConversationDetailsTemplate" xml:space="preserve">
+    <value>Conversation: {0}\nSource: {1}\nUnread: {2}\nUpdated (GMT): {3}</value>
+  </data>
+  <data name="Status_ConversationDetailsWithReplyTemplate" xml:space="preserve">
+    <value>Conversation: {0}\nSource: {1}\nUnread: {2}\nUpdated (GMT): {3}\nLast reply: {4}</value>
+  </data>
+  <data name="Status_LoginAcceptedMfaRequired" xml:space="preserve">
+    <value>Login accepted. MFA required (stub API behavior).</value>
+  </data>
+  <data name="Status_LoginSuccessful" xml:space="preserve">
+    <value>Login successful.</value>
+  </data>
+  <data name="Status_LoadedConversations" xml:space="preserve">
+    <value>Loaded {0} conversation(s).</value>
+  </data>
+  <data name="Status_ReplySent" xml:space="preserve">
+    <value>Reply sent to {0} at {1}.</value>
+  </data>
+  <data name="Status_SettingsLoaded" xml:space="preserve">
+    <value>Settings loaded.</value>
+  </data>
+  <data name="Status_SettingsSaved" xml:space="preserve">
+    <value>Settings saved.</value>
+  </data>
+  <data name="Status_LoggedOut" xml:space="preserve">
+    <value>Logged out.</value>
+  </data>
+  <data name="Status_LoadingConversationMessages" xml:space="preserve">
+    <value>Loading conversation messages...</value>
+  </data>
+  <data name="Status_RefreshCanceled" xml:space="preserve">
+    <value>Refresh canceled.</value>
+  </data>
+  <data name="Status_LoadedMessagesFromApi" xml:space="preserve">
+    <value>Loaded {0} message(s) from API.</value>
+  </data>
+  <data name="Status_NoMoreMessagesAvailable" xml:space="preserve">
+    <value>No more messages available.</value>
+  </data>
+  <data name="Status_LoadingMoreMessages" xml:space="preserve">
+    <value>Loading more messages...</value>
+  </data>
+  <data name="Status_LoadedTotalMessages" xml:space="preserve">
+    <value>Loaded {0} total message(s).</value>
+  </data>
+  <data name="Status_LiveUpdatesConnected" xml:space="preserve">
+    <value>Live updates connected.</value>
+  </data>
+  <data name="Status_LiveUpdatesReconnecting" xml:space="preserve">
+    <value>Live updates reconnecting...</value>
+  </data>
+  <data name="Status_LiveUpdatesFallbackPolling" xml:space="preserve">
+    <value>Fallback polling active.</value>
+  </data>
+  <data name="Notification_NewMessageTitle" xml:space="preserve">
+    <value>New support message</value>
+  </data>
+  <data name="Notification_NewMessageFallbackBody" xml:space="preserve">
+    <value>Conversation {0} has a new message.</value>
+  </data>
+  <data name="Notification_NewMessageBurstBody" xml:space="preserve">
+    <value>Conversation {0} has {1} new messages.</value>
+  </data>
+  <data name="Error_EnterEmailPassword" xml:space="preserve">
+    <value>Please enter username and password.</value>
+  </data>
+  <data name="Error_LoginFirst" xml:space="preserve">
+    <value>Please login first.</value>
+  </data>
+  <data name="Error_EnterApiKey" xml:space="preserve">
+    <value>Please enter X-API-Key.</value>
+  </data>
+  <data name="Error_SelectConversationFirst" xml:space="preserve">
+    <value>Select a conversation first.</value>
+  </data>
+  <data name="Error_EnterReplyMessage" xml:space="preserve">
+    <value>Enter a reply message.</value>
+  </data>
+  <data name="Error_ReplyMinLength" xml:space="preserve">
+    <value>Reply must be at least 3 characters.</value>
+  </data>
+  <data name="Error_ReplyMaxLength" xml:space="preserve">
+    <value>Reply exceeds 2000 characters.</value>
+  </data>
+  <data name="Error_EnterApiKeyFirst" xml:space="preserve">
+    <value>Please enter X-API-Key first.</value>
+  </data>
+  <data name="Error_BaseUrlInvalid" xml:space="preserve">
+    <value>Base URL is invalid.</value>
+  </data>
+  <data name="Error_UseHttpsOrLocalhostHttp" xml:space="preserve">
+    <value>Use HTTPS (HTTP only allowed for localhost).</value>
+  </data>
+  <data name="Error_BaseUrlRequired" xml:space="preserve">
+    <value>Base URL is required.</value>
+  </data>
+  <data name="Error_ApiKeyRequired" xml:space="preserve">
+    <value>API key is required.</value>
+  </data>
+  <data name="Error_CursorExpiredReloading" xml:space="preserve">
+    <value>Cursor expired. Reloading latest messages...</value>
+  </data>
+  <data name="ConversationDetails_UnreadTemplate" xml:space="preserve">
+    <value>Unread: {0}</value>
+  </data>
+  <data name="ConversationDetails_AutoRefreshIntervalTemplate" xml:space="preserve">
+    <value>Interval: {0}s</value>
+  </data>
+  <data name="ConversationDetails_Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="ConversationDetails_LoadMore" xml:space="preserve">
+    <value>Load More</value>
+  </data>
+  <data name="ConversationDetails_NoMoreMessages" xml:space="preserve">
+    <value>No More Messages</value>
+  </data>
+  <data name="ConversationDetailsPage_SaveAiModeButton.Content" xml:space="preserve">
+    <value>Save AI mode</value>
+  </data>
+  <data name="ConversationDetailsPage_OpenBookingOverlayButton.Content" xml:space="preserve">
+    <value>Open booking overlay at visitor</value>
+  </data>
+  <data name="ConversationDetailsPage_DeleteConversationButton.Content" xml:space="preserve">
+    <value>Delete this conversation</value>
+  </data>
+  <data name="ConversationDetails_AiMode_Off" xml:space="preserve">
+    <value>AI off (temporary)</value>
+  </data>
+  <data name="ConversationDetails_AiMode_Visitor" xml:space="preserve">
+    <value>AI replies to visitor only</value>
+  </data>
+  <data name="ConversationDetails_AiMode_Support" xml:space="preserve">
+    <value>AI replies to support only</value>
+  </data>
+  <data name="ConversationDetails_AiMode_Both" xml:space="preserve">
+    <value>AI replies to both sides</value>
+  </data>
+  <data name="Status_AiModeSaved" xml:space="preserve">
+    <value>AI mode saved.</value>
+  </data>
+  <data name="Status_BookingOverlayTriggered" xml:space="preserve">
+    <value>Booking overlay triggered for visitor.</value>
+  </data>
+  <data name="Status_ConversationDeleted" xml:space="preserve">
+    <value>Conversation deleted.</value>
+  </data>
+  <data name="Status_ConversationAlreadyDeleted" xml:space="preserve">
+    <value>Conversation was already deleted.</value>
+  </data>
+  <data name="ConversationDetails_DeleteDialog_Title" xml:space="preserve">
+    <value>Delete this conversation?</value>
+  </data>
+  <data name="ConversationDetails_DeleteDialog_Content" xml:space="preserve">
+    <value>This action cannot be undone.</value>
+  </data>
+  <data name="ConversationDetails_DeleteDialog_Confirm" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ConversationDetails_DeleteDialog_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ConversationDetails_ConversationDeletedBanner" xml:space="preserve">
+    <value>This conversation was deleted in another session.</value>
+  </data>
+  <data name="TokenLabel_Access" xml:space="preserve">
+    <value>access</value>
+  </data>
+  <data name="TokenLabel_Refresh" xml:space="preserve">
+    <value>refresh</value>
+  </data>
+  <data name="TokenMask_Empty" xml:space="preserve">
+    <value>{0}: &lt;empty&gt;</value>
+  </data>
+  <data name="TokenMask_Short" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="TokenMask_Long" xml:space="preserve">
+    <value>{0}: {1}...{2}</value>
+  </data>
+  <data name="LanguageName_de" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="LanguageName_en" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="LanguageName_fr" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="LanguageName_es" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
+  <data name="LanguageName_pt-BR" xml:space="preserve">
+    <value>Portuguese (Brazil)</value>
+  </data>
+  <data name="ThemeModeName_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="ThemeModeName_Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="ThemeModeName_Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+</root>

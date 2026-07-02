@@ -1,9 +1,0 @@
-{
-  "solution": {
-    "path": "Restatify.SupportChat.sln",
-    "projects": [
-      "Restatify.SupportChat.Windows\\Restatify.SupportChat.Windows.csproj",
-      "Restatify.SupportChat.DataContracts\\Restatify.SupportChat.DataContracts.csproj"
-    ]
-  }
-}
