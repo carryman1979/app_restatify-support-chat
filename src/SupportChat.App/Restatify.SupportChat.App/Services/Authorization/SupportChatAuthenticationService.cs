@@ -1,5 +1,6 @@
 using Restatify.SupportChat.Services.Settings;
 using Restatify.SupportChat.Services.Support;
+using System.Net;
 using Uno.Extensions.Authentication;
 
 namespace Restatify.SupportChat.Services.Authorization;
@@ -14,6 +15,8 @@ public sealed class SupportChatAuthenticationService : IAuthenticationService
 	private readonly ISupportChatApiClient _api;
 	private readonly IUserSettingsStore _userSettingsStore;
 	private readonly ILogger<SupportChatAuthenticationService> _logger;
+
+	public string? LastLoginError { get; private set; }
 
 	public SupportChatAuthenticationService(
 		ISupportChatApiClient api,
@@ -35,21 +38,31 @@ public sealed class SupportChatAuthenticationService : IAuthenticationService
 		string? provider,
 		CancellationToken? cancellationToken = null)
 	{
+		LastLoginError = null;
+
 		var token = cancellationToken ?? CancellationToken.None;
 		var activeProvider = string.IsNullOrWhiteSpace(provider) ? ProviderName : provider;
 		if (!string.Equals(activeProvider, ProviderName, StringComparison.OrdinalIgnoreCase))
 		{
+			LastLoginError = "Anmeldung für den gewählten Auth-Provider ist nicht verfügbar.";
 			return false;
 		}
 
 		if (credentials is null)
 		{
+			LastLoginError = "Anmeldedaten fehlen.";
 			return false;
 		}
 
-		if (!credentials.TryGetValue(CredentialUsernameKey, out var username) || string.IsNullOrWhiteSpace(username)
-			|| !credentials.TryGetValue(CredentialPasswordKey, out var password) || string.IsNullOrWhiteSpace(password))
+		if (!credentials.TryGetValue(CredentialUsernameKey, out var username) || string.IsNullOrWhiteSpace(username))
 		{
+			LastLoginError = "Bitte Benutzernamen eingeben.";
+			return false;
+		}
+
+		if (!credentials.TryGetValue(CredentialPasswordKey, out var password) || string.IsNullOrWhiteSpace(password))
+		{
+			LastLoginError = "Bitte Passwort eingeben.";
 			return false;
 		}
 
@@ -66,6 +79,7 @@ public sealed class SupportChatAuthenticationService : IAuthenticationService
 
 		if (!Uri.TryCreate(baseUrlOverride, UriKind.Absolute, out _))
 		{
+			LastLoginError = "Die API-Base-URL ist ungültig.";
 			return false;
 		}
 
@@ -85,8 +99,56 @@ public sealed class SupportChatAuthenticationService : IAuthenticationService
 		catch (Exception ex)
 		{
 			_logger.LogWarning(ex, "Authentication login failed for endpoint {BaseUrl}.", baseUrlOverride);
+			LastLoginError = BuildFriendlyLoginError(ex, baseUrlOverride);
 			return false;
 		}
+	}
+
+	private static string BuildFriendlyLoginError(Exception ex, string baseUrl)
+	{
+		var endpointHint = BuildEndpointHint(baseUrl);
+
+		if (ex is HttpRequestException httpEx)
+		{
+			if (httpEx.StatusCode == HttpStatusCode.Unauthorized)
+			{
+				return "Login fehlgeschlagen (401 Unauthorized). Bitte Benutzername und Passwort prüfen.";
+			}
+
+			if (httpEx.StatusCode == HttpStatusCode.Forbidden)
+			{
+				return "Login fehlgeschlagen (403 Forbidden). Zugriff wurde vom Server verweigert.";
+			}
+
+			if (httpEx.StatusCode is not null)
+			{
+				return $"Login fehlgeschlagen (HTTP {(int)httpEx.StatusCode} {httpEx.StatusCode}).";
+			}
+
+			return $"Verbindung zur API fehlgeschlagen ({baseUrl}). {httpEx.Message}{endpointHint}";
+		}
+
+		return $"Login fehlgeschlagen: {ex.Message}{endpointHint}";
+	}
+
+	private static string BuildEndpointHint(string baseUrl)
+	{
+		if (!Uri.TryCreate(baseUrl, UriKind.Absolute, out var uri))
+		{
+			return string.Empty;
+		}
+
+		if (uri.Host == "10.0.0.2")
+		{
+			return " Hinweis: Im Android-Emulator ist die Host-Maschine unter 10.0.2.2 erreichbar (nicht 10.0.0.2).";
+		}
+
+		if (uri.Scheme == Uri.UriSchemeHttps && uri.Host is "10.0.2.2" or "127.0.0.1" or "localhost")
+		{
+			return $" Hinweis: Lokale Development-APIs laufen häufig ohne TLS. Versuche http://{uri.Host}:{uri.Port}.";
+		}
+
+		return string.Empty;
 	}
 
 	public async ValueTask<bool> RefreshAsync(CancellationToken? cancellationToken = null)

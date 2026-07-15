@@ -10,6 +10,15 @@
 
 	<Page.Resources>
 		<local:BooleanToVisibilityConverter x:Key="VisibleWhenTrue" />
+		<Style x:Key="FabSplitButtonStyle" TargetType="SplitButton">
+			<Setter Property="Background" Value="{ThemeResource PrimaryBrush}" />
+			<Setter Property="Foreground" Value="{ThemeResource OnPrimaryBrush}" />
+			<Setter Property="BorderBrush" Value="{ThemeResource PrimaryBrush}" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="CornerRadius" Value="18" />
+			<Setter Property="MinHeight" Value="36" />
+			<Setter Property="Padding" Value="10,8" />
+		</Style>
 	</Page.Resources>
 
 	<Grid>
@@ -46,13 +55,16 @@
 					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 
-				<StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-					<ComboBox Width="220"
+				<Grid Grid.Row="0" Grid.Column="0" ColumnSpacing="8" VerticalAlignment="Center">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<ComboBox Grid.Column="0"
 							  FontSize="14"
 							  MinHeight="36"
 							  DisplayMemberPath="Label"
@@ -60,11 +72,14 @@
 							  ItemsSource="{Binding AiModeOptions}"
 							  IsEnabled="{Binding CanInteractWithConversation}"
 							  SelectedValue="{Binding SelectedAiMode, Mode=TwoWay}" />
-					<Button x:Uid="ConversationDetailsPage_SaveAiModeButton"
+					<Button Grid.Column="1"
+							x:Uid="ConversationDetailsPage_SaveAiModeButton"
 							Content="KI-Modus speichern"
 							IsEnabled="{Binding CanInteractWithConversation}"
-							Command="{Binding SaveAiModeCommand}" />
-				</StackPanel>
+							Command="{Binding SaveAiModeCommand}"
+							Padding="10,8"
+							MinWidth="130" />
+				</Grid>
 
 				<Button Grid.Row="0" Grid.Column="1"
 						x:Name="LoadMoreArrowButton"
@@ -85,27 +100,33 @@
 					<FontIcon Glyph="&#xE74A;" FontSize="11" />
 				</Button>
 
-				<StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Right">
-					<TextBlock Text="{Binding LiveUpdatesStatusText}"
-							   VerticalAlignment="Center"
-							   Foreground="{Binding LiveUpdatesStatusBrush}"
+				<Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ColumnSpacing="8">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0"
+							   Text="{Binding ServerStatus}"
 							   FontSize="12"
+							   Opacity="0.7"
 							   TextTrimming="CharacterEllipsis"
 							   MaxLines="1"
-							   MaxWidth="260" />
-				</StackPanel>
-
-				<TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-						   Text="{Binding ServerStatus}"
-						   VerticalAlignment="Center"
-						   FontSize="12"
-						   Opacity="0.7"
-						   TextTrimming="CharacterEllipsis"
-						   MaxLines="1" />
+							   VerticalAlignment="Center" />
+					<Ellipse Grid.Column="1"
+						 Width="10"
+						 Height="10"
+						 Fill="{Binding LiveUpdatesStatusBrush}"
+						 Stroke="{ThemeResource OutlineColor}"
+						 StrokeThickness="1"
+						 VerticalAlignment="Bottom"
+						 HorizontalAlignment="Right"
+						 ToolTipService.ToolTip="{Binding LiveUpdatesStatusText}" />
+				</Grid>
 			</Grid>
 
 			<!-- Message Thread -->
 			<ListView Grid.Row="1"
+					  x:Name="ServerMessagesListView"
 					  ItemsSource="{Binding ServerMessages}"
 					  BorderBrush="{ThemeResource OutlineVariantColor}"
 					  BorderThickness="1"
@@ -165,7 +186,6 @@
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
 						<RowDefinition Height="Auto" />
-						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />
@@ -186,32 +206,36 @@
 							 x:Name="ReplyMessageTextBox"
 							 x:Uid="ConversationDetailsPage_ReplyMessageTextBox"
 							 Text="{Binding ReplyMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 InputScope="Text"
+							 PreventKeyboardDisplayOnProgrammaticFocus="False"
 							 PlaceholderText="Antwort eingeben..."
 							 KeyDown="OnReplyMessageKeyDown"
 							 IsEnabled="{Binding CanInteractWithConversation}"
 							 AcceptsReturn="False"
 							 MinHeight="60"
 							 MaxHeight="120" />
-					<Button Grid.Row="1" Grid.Column="1"
-							x:Uid="ConversationDetailsPage_SendReplyButton"
-							Content="Senden"
-							Command="{Binding SendReplyCommand}"
-							IsEnabled="{Binding CanInteractWithConversation}"
-							VerticalAlignment="Center"
-							MinWidth="90"
-							Padding="14,10" />
-
-					<StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="8">
-						<Button x:Uid="ConversationDetailsPage_OpenBookingOverlayButton"
-								Content="Buchungs-Overlay beim Besucher öffnen"
-								Command="{Binding OpenBookingOverlayCommand}"
-								IsEnabled="{Binding CanInteractWithConversation}"
-								Visibility="{Binding IsBookingOverlayAvailable, Converter={StaticResource VisibleWhenTrue}}" />
-						<Button x:Uid="ConversationDetailsPage_DeleteConversationButton"
-								Content="Diese Unterhaltung löschen"
-								IsEnabled="{Binding CanInteractWithConversation}"
-								Click="OnDeleteConversationClick" />
-					</StackPanel>
+					<SplitButton
+							 Grid.Row="1" Grid.Column="1"
+							 Style="{StaticResource FabSplitButtonStyle}"
+							 Command="{Binding SendReplyCommand}"
+							 IsEnabled="{Binding CanInteractWithConversation}"
+							 VerticalAlignment="Center"
+							 MinWidth="84"
+							 Padding="10,8">
+						<ToolTipService.ToolTip>Senden</ToolTipService.ToolTip>					
+						
+						<SymbolIcon Symbol="Send" />
+						
+						<SplitButton.Flyout>
+							<MenuFlyout>
+								<MenuFlyoutItem Text="Senden" Command="{Binding SendReplyCommand}" />
+								<MenuFlyoutItem Text="Buchungs-Overlay öffnen"
+											Command="{Binding OpenBookingOverlayCommand}"
+											IsEnabled="{Binding IsBookingOverlayAvailable}" />
+								<MenuFlyoutItem Text="Chat löschen" Click="OnDeleteConversationClick" />
+							</MenuFlyout>
+						</SplitButton.Flyout>
+					</SplitButton>
 				</Grid>
 			</Border>
 		</Grid>

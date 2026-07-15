@@ -104,7 +104,7 @@ public partial class LoginViewModel : ObservableObject
 
 			if (!authenticated)
 			{
-				Status = "Login failed.";
+				Status = ResolveLoginFailureStatus();
 				return;
 			}
 
@@ -129,6 +129,17 @@ public partial class LoginViewModel : ObservableObject
 		{
 			IsBusy = false;
 		}
+	}
+
+	private string ResolveLoginFailureStatus()
+	{
+		if (_authenticationService is SupportChatAuthenticationService supportAuth
+			&& !string.IsNullOrWhiteSpace(supportAuth.LastLoginError))
+		{
+			return supportAuth.LastLoginError;
+		}
+
+		return "Login fehlgeschlagen. Bitte API-URL und Zugangsdaten prüfen.";
 	}
 
 	private void LoadRememberedLogin()

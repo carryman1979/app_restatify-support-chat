@@ -61,8 +61,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
 	private CancellationTokenSource? _liveUpdatesCts;
 	private int _loadConversationsRequestVersion;
 	private readonly SemaphoreSlim _eventRefreshLock = new(1, 1);
-	private static readonly TimeSpan MainFallbackPollingInterval = TimeSpan.FromSeconds(30);
-	private static readonly TimeSpan MainSafetySyncInterval = TimeSpan.FromSeconds(15);
+	private static readonly TimeSpan MainFallbackPollingInterval = TimeSpan.FromSeconds(5);
 	private static readonly TimeSpan NotificationCooldown = TimeSpan.FromSeconds(10);
 	private bool _isLiveUpdatesConnected;
 	private bool _isLiveUpdatesConnecting;
@@ -112,6 +111,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
 			IsLoggedIn = true;
 			_status = T("Status_SessionRestored", "Saved session restored.");
 			_accessTokenPreview = T("Status_ApiKeyReady", "Saved API key ready.");
+			_ = InitializeRestoredSessionAsync();
 		}
 	}
 
@@ -240,7 +240,9 @@ public sealed class MainViewModel : INotifyPropertyChanged
 		? T("Status_LiveUpdatesConnected", "Live updates connected.")
 		: IsLiveUpdatesConnecting
 			? T("Status_LiveUpdatesReconnecting", "Live updates reconnecting...")
-			: T("Status_LiveUpdatesFallbackPolling", "Fallback polling active.");
+			: IsFallbackPollingActive
+				? T("Status_LiveUpdatesFallbackPolling", "Fallback polling active.")
+				: T("Status_LiveUpdatesIdle", "Live updates idle.");
 
 	public Brush LiveUpdatesStatusBrush => IsLiveUpdatesConnected
 		? new SolidColorBrush(global::Windows.UI.Color.FromArgb(255, 46, 125, 50))
@@ -402,7 +404,6 @@ public sealed class MainViewModel : INotifyPropertyChanged
 		_liveUpdatesCts?.Dispose();
 		_liveUpdatesCts = new CancellationTokenSource();
 		_ = LiveUpdatesLoop(_liveUpdatesCts.Token);
-		_ = PeriodicConversationSyncLoop(_liveUpdatesCts.Token);
 		_ = EnsureBackgroundRuntimeStartedAsync();
 	}
 
@@ -676,48 +677,6 @@ public sealed class MainViewModel : INotifyPropertyChanged
 		}
 	}
 
-	private async Task PeriodicConversationSyncLoop(CancellationToken token)
-	{
-		while (!token.IsCancellationRequested)
-		{
-			try
-			{
-				await Task.Delay(MainSafetySyncInterval, token);
-				if (token.IsCancellationRequested || !IsLoggedIn || string.IsNullOrWhiteSpace(ApiKey))
-				{
-					continue;
-				}
-
-				if (!await _eventRefreshLock.WaitAsync(0, token))
-				{
-					continue;
-				}
-
-				try
-				{
-					var items = await _api.GetConversationsAsync(BaseUrl, ApiKey.Trim(), token);
-					await RunOnUiThreadAsync(() => ApplyConversations(items, updateStatus: false));
-				}
-				catch (HttpRequestException ex) when (IsInvalidApiKeyError(ex))
-				{
-					await RedirectToLoginForExpiredSessionAsync("PeriodicConversationSyncLoop.InvalidApiKey");
-					return;
-				}
-				finally
-				{
-					_eventRefreshLock.Release();
-				}
-			}
-			catch (OperationCanceledException)
-			{
-				return;
-			}
-			catch (Exception ex)
-			{
-				_logger.LogDebug(ex, "Periodic conversation sync failed. BaseUrl={BaseUrl}", BaseUrl);
-			}
-		}
-	}
 
 	public async Task SendReply()
 	{
@@ -822,6 +781,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
 
 		return true;
 	}
+
 
 	private void ReloadConnectionSettings()
 	{
@@ -955,7 +915,21 @@ public sealed class MainViewModel : INotifyPropertyChanged
 			return;
 		}
 
-		ApplyConversations(items, updateStatus: true);
+		await RunOnUiThreadAsync(() => ApplyConversations(items, updateStatus: true));
+	}
+
+	private async Task InitializeRestoredSessionAsync()
+	{
+		try
+		{
+			await LoadConversationsCore();
+			EnsureLiveUpdatesStarted();
+			await EnsureBackgroundRuntimeStartedAsync();
+		}
+		catch (Exception ex)
+		{
+			_logger.LogWarning(ex, "Restored session initialization failed. BaseUrl={BaseUrl}", BaseUrl);
+		}
 	}
 
 		private async Task RedirectToLoginForExpiredSessionAsync(string reason)

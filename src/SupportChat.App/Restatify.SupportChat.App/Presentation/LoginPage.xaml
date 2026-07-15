@@ -16,7 +16,12 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
-		<utu:NavigationBar Content="{Binding Title}" />
+		<utu:NavigationBar Content="{Binding Title}">
+			<utu:NavigationBar.SecondaryCommands>
+				<AppBarButton Label="Settings" Icon="Setting" Click="OnOpenSettingsClick" />
+				<AppBarButton Label="Logs" Icon="Document" Click="OnOpenLogsClick" />
+			</utu:NavigationBar.SecondaryCommands>
+		</utu:NavigationBar>
 
 		<ScrollViewer Grid.Row="1"
 					  VerticalScrollBarVisibility="Auto"
@@ -44,6 +49,8 @@
 							 HorizontalAlignment="Stretch" />
 						<TextBox Header="Benutzername"
 							 Text="{Binding Username, Mode=TwoWay}"
+							 InputScope="EmailSmtpAddress"
+							 PreventKeyboardDisplayOnProgrammaticFocus="False"
 							 PlaceholderText="support"
 							 HorizontalAlignment="Stretch" />
 						<PasswordBox Header="Passwort"
@@ -73,9 +80,8 @@
 			<TextBlock Text="{Binding Status}"
 					   FontSize="11"
 					   Opacity="0.8"
-					   MaxLines="3"
-					   TextWrapping="Wrap"
-					   TextTrimming="CharacterEllipsis" />
+					   MaxLines="5"
+					   TextWrapping="Wrap" />
 		</Border>
 	</Grid>
 </Page>
