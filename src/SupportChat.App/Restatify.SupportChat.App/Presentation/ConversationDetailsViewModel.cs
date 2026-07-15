@@ -12,6 +12,7 @@ namespace Restatify.SupportChat.Presentation;
 public sealed class ConversationDetailsViewModel : INotifyPropertyChanged
 {
 	private const string ErrorStatusPrefix = "ERROR: ";
+	private const int FallbackPollingIntervalSeconds = 5;
 	private static readonly HashSet<string> AllowedAiModes = ["off", "visitor", "support", "both"];
 	private readonly IConversationReplyStore _replyStore;
 	private readonly ISupportChatApiClient _api;
@@ -86,7 +87,7 @@ public sealed class ConversationDetailsViewModel : INotifyPropertyChanged
 	public string UpdatedAtGmt { get; }
 	public int UnreadCount { get; }
 	public string UnreadText => string.Format(T("ConversationDetails_UnreadTemplate", "Unread: {0}"), UnreadCount);
-	public int AutoRefreshIntervalSeconds => 20;
+	public int AutoRefreshIntervalSeconds => FallbackPollingIntervalSeconds;
 	public string AutoRefreshIntervalText => string.Format(T("ConversationDetails_AutoRefreshIntervalTemplate", "Interval: {0}s"), AutoRefreshIntervalSeconds);
 	public string LoadMoreButtonText
 	{
@@ -659,13 +660,23 @@ public sealed class ConversationDetailsViewModel : INotifyPropertyChanged
 		{
 			try
 			{
-				await Task.Delay(TimeSpan.FromSeconds(AutoRefreshIntervalSeconds), token);
+				if (!IsFallbackPollingActive)
+				{
+					await Task.Delay(TimeSpan.FromSeconds(1), token);
+					continue;
+				}
+
+				await Task.Delay(TimeSpan.FromSeconds(FallbackPollingIntervalSeconds), token);
 				if (token.IsCancellationRequested)
 				{
 					return;
 				}
 
-				// Keep a safety sync even when websocket is connected because visitor-side updates can bypass API event emission.
+				if (!IsFallbackPollingActive)
+				{
+					continue;
+				}
+
 				await RefreshServerMessages();
 			}
 			catch (OperationCanceledException)
@@ -710,6 +721,7 @@ public sealed class ConversationDetailsViewModel : INotifyPropertyChanged
 		var normalized = (aiMode ?? string.Empty).Trim().ToLowerInvariant();
 		return AllowedAiModes.Contains(normalized) ? normalized : "both";
 	}
+
 }
 
 public sealed record AiModeOption(string Value, string Label);

@@ -4,10 +4,88 @@ public sealed partial class ConversationDetailsPage : Page
 {
 	private const double SubtleArrowOpacity = 0.55;
 	private const double ActiveArrowOpacity = 1.0;
+	private bool _pendingScrollToLatest;
+	private ConversationDetailsViewModel? _subscribedViewModel;
 
 	public ConversationDetailsPage()
 	{
 		this.InitializeComponent();
+		Loaded += OnPageLoaded;
+		Unloaded += OnPageUnloaded;
+		DataContextChanged += OnPageDataContextChanged;
+	}
+
+	private void OnPageLoaded(object sender, RoutedEventArgs e)
+	{
+		TrySubscribeToMessages();
+		ScrollToLatestMessage();
+	}
+
+	private void OnPageUnloaded(object sender, RoutedEventArgs e)
+	{
+		if (_subscribedViewModel is not null)
+		{
+			_subscribedViewModel.ServerMessages.CollectionChanged -= OnServerMessagesCollectionChanged;
+			_subscribedViewModel = null;
+		}
+	}
+
+	private void OnPageDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+	{
+		if (_subscribedViewModel is not null)
+		{
+			_subscribedViewModel.ServerMessages.CollectionChanged -= OnServerMessagesCollectionChanged;
+			_subscribedViewModel = null;
+		}
+
+		TrySubscribeToMessages();
+		ScheduleScrollToLatestMessage();
+	}
+
+	private void TrySubscribeToMessages()
+	{
+		if (DataContext is not ConversationDetailsViewModel model)
+		{
+			return;
+		}
+
+		model.ServerMessages.CollectionChanged -= OnServerMessagesCollectionChanged;
+		model.ServerMessages.CollectionChanged += OnServerMessagesCollectionChanged;
+		_subscribedViewModel = model;
+	}
+
+	private void OnServerMessagesCollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+	{
+		if (e.Action is System.Collections.Specialized.NotifyCollectionChangedAction.Add
+			or System.Collections.Specialized.NotifyCollectionChangedAction.Reset
+			or System.Collections.Specialized.NotifyCollectionChangedAction.Replace)
+		{
+			ScheduleScrollToLatestMessage();
+		}
+	}
+
+	private void ScheduleScrollToLatestMessage()
+	{
+		if (_pendingScrollToLatest)
+		{
+			return;
+		}
+
+		_pendingScrollToLatest = true;
+		DispatcherQueue.TryEnqueue(() =>
+		{
+			_pendingScrollToLatest = false;
+			ScrollToLatestMessage();
+		});
+	}
+
+	private void ScrollToLatestMessage()
+	{
+		if (FindName("ServerMessagesListView") is ListView listView
+			&& listView.Items?.Count > 0)
+		{
+			listView.ScrollIntoView(listView.Items[listView.Items.Count - 1]);
+		}
 	}
 
 	private void OnBackClick(object sender, RoutedEventArgs e)

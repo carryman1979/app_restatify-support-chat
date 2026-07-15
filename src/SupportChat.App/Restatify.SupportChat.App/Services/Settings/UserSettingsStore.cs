@@ -10,13 +10,9 @@ namespace Restatify.SupportChat.Services.Settings;
 
 public sealed partial class UserSettingsStore : IUserSettingsStore
 {
-	#if ANDROID
-	private const string DefaultHttpApiHost = "10.0.2.2";
-	#else
-	private const string DefaultHttpApiHost = "127.0.0.1";
-	#endif
+	private const string DefaultHttpApiHost = "http://127.0.0.1";
 	public const int DefaultHttpApiPort = 8089;
-	private static readonly string DefaultBaseUrl = $"http://{DefaultHttpApiHost}:{DefaultHttpApiPort}";
+	private static readonly string DefaultBaseUrl = $"{DefaultHttpApiHost}:{DefaultHttpApiPort}";
 	private const string SettingsFileName = "supportchat.settings.json";
 	private const string DefaultApiKey = "";
 	private const string DefaultLanguageCode = "de";
@@ -179,6 +175,14 @@ public sealed partial class UserSettingsStore : IUserSettingsStore
 		if (!Uri.TryCreate(trimmed, UriKind.Absolute, out var uri))
 		{
 			return trimmed;
+		}
+
+		if (uri.Host == "10.0.2.2"
+			&& uri.Port == DefaultHttpApiPort
+			&& (string.IsNullOrWhiteSpace(uri.AbsolutePath) || uri.AbsolutePath == "/"))
+		{
+			// Migrate previous Android-emulator default back to local localhost default.
+			return DefaultBaseUrl;
 		}
 
 		if (uri.Scheme == Uri.UriSchemeHttp && !HasExplicitPort(trimmed))

@@ -13,8 +13,8 @@
 		<AssemblyTitle>Restatify Support Chat</AssemblyTitle>
 		<Product>Restatify Support Chat</Product>
 		<ApplicationId>tech.restatify.supportchat</ApplicationId>
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
+		<ApplicationDisplayVersion>1.1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>2</ApplicationVersion>
 		<ApplicationPublisher>Restatify UG</ApplicationPublisher>
 		<Description>Restatify Support Chat powered by Uno Platform to connect to the wordpress chat plugin Restatify AI Multichat.</Description>
 
@@ -34,6 +34,21 @@
 			ThemeService;
 			SkiaRenderer;
 		</UnoFeatures>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+		<!-- Avoid flaky EOF issues from AndroidMessageHandler against local reverse-tunneled endpoints. -->
+		<UseNativeHttpHandler>false</UseNativeHttpHandler>
+		<AndroidHttpClientHandlerType>System.Net.Http.SocketsHttpHandler, System.Net.Http</AndroidHttpClientHandlerType>
+	</PropertyGroup>
+
+	<ItemGroup>
+    	<UnoImage Include="Assets\Images\*" />
+	</ItemGroup>
+	<PropertyGroup>
+		<UnoIconForegroundFile>Assets\Icons\icon_foreground.svg</UnoIconForegroundFile>
+		<UnoIconBackgroundFile>Assets\Icons\icon.svg</UnoIconBackgroundFile>
+		<UnoIconColor>#FFFFFF</UnoIconColor>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='Debug' or '$(IsUiAutomationMappingEnabled)'=='True'">

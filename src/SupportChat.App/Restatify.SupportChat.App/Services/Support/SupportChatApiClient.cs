@@ -93,9 +93,14 @@ public sealed class SupportChatApiClient : ISupportChatApiClient
 			throw new ArgumentNullException(nameof(onEvent));
 		}
 
-		var wsUri = BuildSupportUpdatesWebSocketUri(baseUrl, apiKey, conversationId);
+		var effectiveApiKey = ResolveEffectiveApiKey(baseUrl, apiKey);
+		var wsUri = BuildSupportUpdatesWebSocketUri(baseUrl, effectiveApiKey ?? string.Empty, conversationId);
 		using var socket = new ClientWebSocket();
 		socket.Options.KeepAliveInterval = TimeSpan.FromSeconds(20);
+		if (!string.IsNullOrWhiteSpace(effectiveApiKey))
+		{
+			socket.Options.SetRequestHeader("X-API-Key", effectiveApiKey);
+		}
 
 		await socket.ConnectAsync(wsUri, cancellationToken);
 
@@ -321,7 +326,7 @@ public sealed class SupportChatApiClient : ISupportChatApiClient
 			? string.Empty
 			: $" Hinweis: {hint}";
 
-		return new HttpRequestException($"Verbindung zur Support-API fehlgeschlagen ({endpoint}). Pruefe, ob API/Container laeuft und der konfigurierte Port stimmt.{details} Letzter Fehler: {ex.Message}", ex);
+		return new HttpRequestException($"Verbindung zur Support-API fehlgeschlagen ({endpoint}). Prüfe, ob API/Container läuft und der konfigurierte Port stimmt.{details} Letzter Fehler: {ex.Message}", ex);
 	}
 
 	private static string? TryGetLegacyLocalPortHint(string endpoint)
@@ -335,7 +340,7 @@ public sealed class SupportChatApiClient : ISupportChatApiClient
 			&& uri.Host is "127.0.0.1" or "localhost"
 			&& uri.Port != 8089)
 		{
-			return "Die lokale API in diesem Workspace verwendet standardmaessig Port 8089 (z. B. http://127.0.0.1:8089).";
+			return "Die lokale API in diesem Workspace verwendet standardmäßig Port 8089 (z. B. http://127.0.0.1:8089).";
 		}
 
 		return null;
@@ -458,12 +463,7 @@ public sealed class SupportChatApiClient : ISupportChatApiClient
 			client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
 		}
 
-		var effectiveApiKey = apiKey?.Trim();
-		if (string.IsNullOrWhiteSpace(effectiveApiKey)
-			&& uri.Host is "localhost" or "127.0.0.1")
-		{
-			effectiveApiKey = LocalDevApiKeyFallback;
-		}
+		var effectiveApiKey = ResolveEffectiveApiKey(baseUrl, apiKey);
 
 		if (!string.IsNullOrWhiteSpace(effectiveApiKey))
 		{
@@ -471,6 +471,27 @@ public sealed class SupportChatApiClient : ISupportChatApiClient
 		}
 
 		return client;
+	}
+
+	private static string? ResolveEffectiveApiKey(string baseUrl, string? apiKey)
+	{
+		var effectiveApiKey = apiKey?.Trim();
+		if (!string.IsNullOrWhiteSpace(effectiveApiKey))
+		{
+			return effectiveApiKey;
+		}
+
+		if (!Uri.TryCreate(baseUrl, UriKind.Absolute, out var uri))
+		{
+			return effectiveApiKey;
+		}
+
+		if (uri.Host is "localhost" or "127.0.0.1")
+		{
+			return LocalDevApiKeyFallback;
+		}
+
+		return effectiveApiKey;
 	}
 
 	private static string CombinePath(string basePath, string relativePath)
