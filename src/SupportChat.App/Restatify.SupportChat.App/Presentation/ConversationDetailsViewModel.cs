@@ -256,8 +256,16 @@ public sealed class ConversationDetailsViewModel : INotifyPropertyChanged
 	public string ReplyMessage
 	{
 		get => _replyMessage;
-		set => SetProperty(ref _replyMessage, value);
+		set
+		{
+			if (SetProperty(ref _replyMessage, value))
+			{
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsMobileReplyPreviewVisible)));
+			}
+		}
 	}
+
+	public bool IsMobileReplyPreviewVisible => IsMobileClient && !string.IsNullOrWhiteSpace(ReplyMessage);
 
 	public string DeleteDialogTitle => T("ConversationDetails_DeleteDialog_Title", "Delete this conversation?");
 	public string DeleteDialogContent => T("ConversationDetails_DeleteDialog_Content", "This action cannot be undone.");
@@ -715,6 +723,8 @@ public sealed class ConversationDetailsViewModel : INotifyPropertyChanged
 			? message
 			: $"{ErrorStatusPrefix}{message}";
 	}
+
+	private static bool IsMobileClient => OperatingSystem.IsAndroid() || OperatingSystem.IsIOS();
 
 	private static string NormalizeAiMode(string? aiMode)
 	{
