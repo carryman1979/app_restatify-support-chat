@@ -53,6 +53,7 @@
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*" />
@@ -122,6 +123,20 @@
 						 HorizontalAlignment="Right"
 						 ToolTipService.ToolTip="{Binding LiveUpdatesStatusText}" />
 				</Grid>
+
+				<Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+						Background="{ThemeResource SurfaceVariantColor}"
+						BorderBrush="{ThemeResource OutlineVariantColor}"
+						BorderThickness="1"
+						CornerRadius="6"
+						Padding="8,6"
+						Visibility="{Binding IsMobileReplyPreviewVisible, Converter={StaticResource VisibleWhenTrue}}">
+					<TextBlock Text="{Binding ReplyMessage}"
+							   TextWrapping="Wrap"
+							   MaxLines="2"
+							   FontSize="12"
+							   Opacity="0.9" />
+				</Border>
 			</Grid>
 
 			<!-- Message Thread -->
